@@ -110,21 +110,10 @@ input {
 
 #card-image1 {
   position: absolute;
-  right: 1px;
-  bottom: -3px;
-  height: 350px;
-  /* height: 100%; */
-  width: 350px;
-}
-
-#card-image1 {
-  position: absolute;
   right: -17px;
   bottom: -16px;
   height: 250px;
   /* height: 100%; */
   width: 150px;
 }
-
-
 
