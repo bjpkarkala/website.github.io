@@ -108,11 +108,12 @@ input {
   align-items: center;
 }
 
+
 #card-image1 {
-  position: absolute;
-  right: -17px;
-  bottom: -16px;
-  height: 250px;
-  /* height: 100%; */
-  width: 150px;
+    position: absolute;
+    right: -18px;
+    bottom: -16px;
+    height: 250px;
+    /* height: 100%; */
+    width: 200px;
 }
