@@ -1,13 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>bjpkarkala</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <button id="upload-btn"><a href="https://bjpkarkala.github.io/website.github.io/" style="color:white">ADD YOUR PHOTO</a></button>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Document</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="style.css?v=3.2" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+  </head>
+  <body>
+    <div class="hero">
+      <div class="card" id="card">
+        <img src="images/profile.png" id="profile-pic" />
+        <img src="images/bjp.png" id="card-image" />
+        <img src="images/updated.png" id="card-image1" />
+      </div>
+    </div>
+    <div id="downloadbutton">
+      <label for="input-file">Upload Image</label>
+      <input
+        type="file"
+        accept="image/jpeg, image/png, image/jpg"
+        id="input-file"
+      />
+    </div>
+    <button id="crop-btn" style="display: none">Crop</button>
+    <button id="upload-btn" style="display: none">DOWNLOAD</button>
+
+    <script>
+      const profilePic = document.getElementById("profile-pic");
+      // profilePic.style.zIndex = "160";
+      const inputFile = document.getElementById("input-file");
+      const cropBtn = document.getElementById("crop-btn");
+      const uploadBtn = document.getElementById("upload-btn");
+      const cc = document.getElementsByClassName("croppie-container");
+
+      let croppieInstance = null;
+
+      inputFile.onchange = function () {
+        const file = inputFile.files[0];
+
+        // create croppie instance
+        if (cc.length == 0)
+          croppieInstance = new Croppie(profilePic, {
+            enableExif: true,
+            viewport: { width: 300, height: 300, type: "circle" },
+            boundary: { width: 300, height: 300 },
+          });
+
+        const reader = new FileReader();
+        document.getElementById("crop-btn").style.display = "block";
+        document.getElementById("downloadbutton").style.display = "none";
+
+        reader.onload = function () {
+          croppieInstance.bind({
+            url: reader.result,
+            orientation: 1,
+          });
+        };
+
+        reader.readAsDataURL(file);
+      };
+
+      cropBtn.addEventListener("click", function () {
+        // get cropped image data
+        croppieInstance.result("base64").then(function (base64) {
+          profilePic.src = base64;
+          croppieInstance.destroy();
+        });
+        document.getElementById("crop-btn").style.display = "none";
+        document.getElementById("upload-btn").style.display = "block";
+        document.getElementById("card-image1").style.zIndex = "130";
+      });
+
+      var downloadBtn = document.getElementById("upload-btn");
+      downloadBtn.addEventListener("click", function () {
+        // get reference to the div element
+        var element = document.getElementById("card");
+
+        // convert div to image
+        html2canvas(element).then(function (canvas) {
+          // convert canvas to PNG image
+          var imgData = canvas.toDataURL("image/png");
+
+          // create a link to download the image
+          var link = document.createElement("a");
+          link.download = "isupportbjp.png";
+          link.href = imgData;
+          link.click();
+        });
+      });
+    </script>
+  </body>
 </html>
