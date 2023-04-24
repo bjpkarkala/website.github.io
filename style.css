@@ -1,5 +1,3 @@
-
-
 * {
   margin: 0;
   padding: 0;
@@ -101,7 +99,7 @@ input {
   width: 370px;
   height: 370px;
   max-width: 400px;
- background-image: linear-gradient(315deg, #f53803 0%,  #f5a720 74%);
+  background: #ff8503 !important;
   border-radius: 0px;
   text-align: center;
   color: #333;
@@ -116,5 +114,17 @@ input {
   bottom: -3px;
   height: 350px;
   /* height: 100%; */
-  width: 350px;
+  width: 350px;
 }
+
+#card-image1 {
+  position: absolute;
+  right: -17px;
+  bottom: -16px;
+  height: 250px;
+  /* height: 100%; */
+  width: 150px;
+}
+
+
+
