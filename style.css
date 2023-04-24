@@ -101,7 +101,7 @@ input {
   width: 370px;
   height: 370px;
   max-width: 400px;
-  background: #ff8503 !important;
+ background-image: linear-gradient(315deg, #f53803 0%,  #f5a720 74%);
   border-radius: 0px;
   text-align: center;
   color: #333;
